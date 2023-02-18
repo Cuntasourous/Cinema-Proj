@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% extends "cine_app/base.html" %}
+{% block body_block %}
+{% load static %}
+
+<head>
+    <title>reciept</title>
+
+    <script language="javascript">
+        function multiply(){
+        var ans= (document.seats)*(5)
+        document.answer.value=ans;
+        }
+        </script>
+</head>
+<div class="container">
+    <h2>{{ user }}'s reciepts</h2>
+    {% if user.is_authenticated %}
+        <p>book a movie <a href="{% url 'browse' %}">here</a></p>
+        {% for book in object_list %}
+            {% if book.user == user %}
+                <p><strong>Movie title: </strong>{{ book.movie_title }}</p>
+                <p><strong>Seats: </strong>{{ book.seats }}</p>
+                <p><strong>Date: </strong>{{ book.date }}</p>
+                <p><strong>time: </strong>{{ book.time }}</p>
+                <br>
+                <a href="{% url 'delete' book.id %}">Delete</a>
+                <hr>
+            {% else %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <P><a href="{% url 'cine_app:user_login' %}"> LOGIN</a> first</P>
+    {% endif %}
+</div>
+
+{% endblock %}

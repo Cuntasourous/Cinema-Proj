@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends "cine_app/base.html" %}
+{% block body_block %}
+{% load static %}
+
+<head>
+    <title>Book tickets</title>
+</head>
+<body>
+    <div id="bookTickets">
+        <h2>BookTickets for {{ movie }}</h2>
+
+        <form action="" method="POST" nctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+        
+            <input type="submit" value="book ticket" class="btn btn-success">
+            <a href="{% url 'index' %}">Cancel</a>
+        </form>
+        <br>
+        
+    </div>
+
+    <script>
+        var name = "{{ movie }}";
+        document.getElementById("id_movie_title").value = name;
+
+        var name = "{{ user.id }}";
+        document.getElementById("id_user").value = name;
+    </script>
+</body>
+{% endblock %}

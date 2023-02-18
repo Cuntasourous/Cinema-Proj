@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends "cine_app/base.html" %}
+{% block body_block %}
+{% load static %}
+
+<head>
+    <title>Register</title>
+</head>
+<body>
+<div class="container">
+    <h1>Register here</h1>
+    <br>
+    <div class="jumbatron">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <input class="btn btn-primary" type="submit" value="Register">
+        </form>
+    </div>
+</div>
+</body>
+{% endblock %}

@@ -1,0 +1,97 @@
+def book_movie(request, movie_id):
+    movie = Movie_list.objects.get(pk=movie_id)
+    movieid = get_object_or_404(Movie_list, id=movie_id)
+    times = timeslots.objects.all()
+
+    movie_title = book.movie_title
+    seats = book.seats
+    date = book.date
+    time = book.time
+
+    #movie_title = request.GET[movie_id]
+    #movie_title = request.POST.get(movie_id)
+
+    #movie_title_id = request.GET[movie_id]
+    #movie_title = request.POST.get(movie_id)
+    #movie_title = movie_title_id
+    #movie_title = request.GET[movie_id]
+
+    if request.method == 'POST':
+        movie_title = request.POST.get(movie_title)
+        #movie_title_var = request.POST['movie_title']
+        #seats = form.cleaned_data['seats']
+        #date = form.cleaned_data['date']
+        #time = form.cleaned_data['time']
+        #movie_title = request.GET[movie_id]
+        
+        form = bookForm(data=request.POST)
+        form.movie_title = movie_title
+        form.save(commit=False)
+
+        if form.is_valid():
+            note = form.save(commit=False)
+            note.user = request.user
+            note.movie_title = movie
+            note.save()
+            form.save()
+            
+            #return HttpResponseRedirect('cine_app/index.html')
+            
+        else:
+            print("error")
+            form = bookForm()
+    else:
+        form = bookForm()
+
+    return render(request, 'cine_app/book_movie.html', {'movie': movie, 'times':times, 'form' : form, 'time':time, 'date':date, 'movie_title':movie_title, 'seats':seats, })
+
+
+
+
+
+
+
+
+
+def book_movie(request, movie_id):
+    movie = Movie_list.objects.get(pk=movie_id)
+    movieid = get_object_or_404(Movie_list, id=movie_id)
+    times = timeslots.objects.all()
+
+    #movie_title = book.movie_title
+    #seats = book.seats
+    #date = book.date
+    #time = book.time
+
+    #movie_title = request.GET[movie_id]
+    #movie_title = request.POST.get(movie_id)
+
+    #data = {'movie_title': movie_id,}
+    #form = bookForm(data)
+
+    if request.method == 'POST':
+        movie_title = request.POST.get(movie_id)
+        #movie_title= request.POST['movie_title']
+        
+        #form = forms.bookForm(movie_title, request.user, request.POST)
+        form = bookForm(data=request.POST)
+        #form['movie_title'] = movie_id
+        #form.movie_title = movie_title
+        form.save(commit=False)
+
+        if form.is_valid():
+            note = form.save(commit=False)
+            note.user = request.user
+            note.movie_title = movie_id
+            note.save()
+            form.save()
+            
+            #return HttpResponseRedirect('cine_app/index.html')
+            
+        else:
+            print("error")
+            form = bookForm()
+    else:
+        form = bookForm()
+
+    return render(request, 'cine_app/book_movie.html', {'movie': movie, 'times':times, 'form' : form, 'movie_title' : movie_title })

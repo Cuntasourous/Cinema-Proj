@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% extends "cine_app/base.html" %}
+{% block body_block %}
+{% load static %}
+
+<div id="search">
+    <form method="POST" action="{% url 'browse' %}">
+        {% csrf_token %}
+        <input type="search" placeholder="search movies by title.." name="searched">
+        <input type="submit" value="search">
+    </form>
+</div>
+
+<div class="results">
+    {% if searched %}
+        <h2>You searched for "{{ searched }}"</h2>
+        <br>
+        <div class="container px-5 py-5">
+            <div class="row">
+                {% for movie in search_results %}
+                    <div class="col mx-1">
+                        <a href="{% url 'show_movie' movie.id %}"><img src="{{ movie.poster.url }}" width="150px" height="auto"></a>
+                        <br>
+                        <a href="{% url 'show_movie' movie.id %}">{{ movie }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <h2>search for a movie..</h2>
+        <br>
+            <div class="container px-5 py-5">
+                <div class="row">
+                    {% for movie in popular_list %}
+                        <div class="col mx-1">
+                            <a href="{% url 'show_movie' movie.id %}"><img src="{{ movie.poster.url }}" width="150px" height="auto"></a>
+                            <br>
+                            <a href="{% url 'show_movie' movie.id %}">{{ movie }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+    {% endif %}
+</div>
+
+{% endblock %}

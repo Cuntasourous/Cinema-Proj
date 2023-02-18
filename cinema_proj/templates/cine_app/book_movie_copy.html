@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% extends "cine_app/base.html" %}
+{% block body_block %}
+{% load static %}
+
+<head>
+    <title>Book tickets</title>
+</head>
+<body>
+    <div id="bookTickets">
+        <h2>BookTickets for {{ movie }}</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <!--{{ form.as_p }}
+            <input type="hidden" name="{{ form.movie_title }}" value="{{ movie_id }}" >
+            <label>Seats: </label>
+            <input type="number" name="{{ form.seats }}">
+            <label>Date: </label>
+            <input type="date" name="{{ form.date }}">
+            <br>
+            {% for time_slot in times %}
+                <input type="radio" id="timeslot" name="timeslots" value="timeslot">
+                <label for="timeslot">{{ time_slot }}</label><br>
+            {% endfor %}
+            {{ form.movie_title }}
+            <input type="hidden" name="{{ form.movie_title }}">
+            
+            
+            {{ form.movie_title }}
+            <label>Seats: </label>
+            {{ form.seats }}
+            <label>Date: </label>
+            {{ form.date }}
+            <br>
+            {{ form.time }}
+            <input type="hidden" name="{{ movie_title }}" value="{{ movie_id }}"{% if movie_title.initial == value %} checked{% endif %}>
+            -->
+            {{ form.as_p }}
+        
+            
+            <input type="submit" value="book ticket" class="btn btn-success">
+            <a href="{% url 'index' %}">Cancel</a>
+        </form>
+
+        {{ message }}
+        {{ movie_instance }}
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% extends "cine_app/base.html" %}
+{% block body_block %}
+{% load static %}
+
+<head>
+    <title>recipet</title>
+</head>
+<div class="container">
+    <h2>{{ user }} recipet</h2>
+    <p><strong>Movie title: </strong>{{ book3.movie_title }}</p>
+    <p><strong>Seats: </strong>{{ book3.seats }}</p>
+    <p><strong>Date: </strong>{{ book3.date }}</p>
+    <p><strong>time: </strong>{{ book3.time }}</p>
+    <br>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends "cine_app/base.html" %}
+{% block body_block %}
+{% load static %}
+
+<head>
+    <title>delete</title>
+</head>
+<div class="container">
+
+    {% if user.is_authenticated %}
+        <h1>Delete</h1>
+        <br>
+        <div class="jumbatron">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <strong>Are you sure you want to delete this?</strong>
+                <br>
+                <input class="btn btn-primary" type="submit" value="delete">
+            </form>
+        </div>
+    
+{% else %}
+    <h1> ERROR 404 </h1>
+    <P>You cannot delete a post if you are not the post's author</P>
+{% endif %}
+</div>
+
+
+{% endblock %}
